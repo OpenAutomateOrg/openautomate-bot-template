@@ -1,27 +1,105 @@
 # OpenAutomate Bot Template
 
-A **super simple** Python bot template for automation tasks. Just modify `bot.py` and run it!
+A **cookiecutter template** for creating Python automation bots. This template helps you quickly generate a new bot project with all the necessary structure and utilities.
 
-## 🚀 Quick Start
+## 🍪 Using This Template (Cookiecutter)
 
-1. **Download** this template
-2. **Edit** `bot.py` - add your automation logic
-3. **Run** with: `python bot.py`
+### Prerequisites
 
-That's it! 🎉
+Install cookiecutter if you haven't already:
+```bash
+pip install cookiecutter
+```
 
-## 📁 Simple Structure
+### Create a New Bot Project
+
+1. **Generate from template**:
+   ```bash
+   cookiecutter https://github.com/OpenAutomateOrg/openautomate-bot-template
+   # OR if you have this locally:
+   cookiecutter d:\CapstoneProject\openautomate-bot-template
+   ```
+
+2. **Answer the prompts**:
+   ```
+   bot_name [MyBot]: FileProcessorBot
+   bot_description [A Python automation bot]: Processes CSV files automatically
+   ```
+
+3. **Navigate to your new project**:
+   ```bash
+   cd FileProcessorBot
+   ```
+
+4. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Edit and run your bot**:
+   ```bash
+   # Edit the main bot file
+   # Then run:
+   python bot.py
+   ```
+
+## 📁 Generated Project Structure
+
+After using cookiecutter, you'll get a project like this:
 
 ```
-openautomate-bot-template/
+your-bot-project/
 ├── bot.py                     # 👈 Your main file - edit this!
 ├── framework/                 # Bot utilities (don't touch)
 ├── examples/                  # Example bots to learn from
 ├── config/                    # Configuration files
+├── tasks/                     # Your custom task modules (optional)
+├── requirements.txt           # Python dependencies
+├── .gitignore                # Git ignore file
+└── README.md                  # Project-specific README
+```
+
+## 🚀 Quick Start (After Creating Your Bot)
+
+1. **Edit bot.py** - Add your automation logic to the `execute` method
+2. **Run** with: `python bot.py`
+3. **Check results** in `Documents/openautomate-bot/YourBotName/`
+
+That's it! 🎉
+
+## 🛠️ Template Development
+
+If you're contributing to this template itself:
+
+### Template Structure
+```
+openautomate-bot-template/
+├── cookiecutter.json          # Template configuration
+├── {{cookiecutter.project_slug}}/  # Template files
+│   ├── bot.py
+│   ├── framework/
+│   ├── config/
+│   └── ...
+├── hooks/                     # Pre/post generation scripts
 └── README.md                  # This file
 ```
 
-## 💡 How to Use
+### Testing the Template
+```bash
+# Test template generation
+cookiecutter . --no-input
+
+# Test with custom values
+cookiecutter . --no-input bot_name="TestBot" bot_description="Test automation bot"
+```
+
+---
+
+# 📖 Bot Development Guide
+
+*The following sections apply to bots created FROM this template*
+
+## 💡 How to Use Your Generated Bot
 
 ### Step 1: Edit bot.py
 
@@ -359,7 +437,7 @@ def get_task_folder():
 ## 📚 What You Get
 
 ### 🗂️ Automatic Folders
-The bot creates folders for your files in `Documents/automationlab/YourBot/`:
+The bot creates folders for your files in `Documents/openautomate-bot/YourBot/`:
 - `input/` - Put files to process here
 - `output/` - Bot saves results here
 - `temp/` - Temporary files
@@ -440,12 +518,23 @@ Edit `config/config.ini` if needed:
 
 ```ini
 [bot]
-name = MyBot
+name = {{ cookiecutter.bot_name }}
+description = {{ cookiecutter.bot_description }}
+version = 1.0.0
 
 [agent]
 enabled = true
 host = localhost
-port = 8080
+port = 8081
+
+[logging]
+level = INFO
+format = %(asctime)s - %(name)s - %(levelname)s - %(message)s
+
+[folders]
+base_path = Documents/openautomate-bot
+create_subfolders = true
+subfolder_names = input,output,temp,screenshots,logs
 ```
 
 ## 💡 Tips
@@ -453,7 +542,7 @@ port = 8080
 1. **Start Simple** - Begin with logging and folder creation
 2. **Use Examples** - Copy from the examples folder
 3. **Test Often** - Run `python bot.py` frequently
-4. **Check Folders** - Look in `Documents/automationlab/YourBot/`
+4. **Check Folders** - Look in `Documents/openautomate-bot/YourBot/`
 5. **Use Assets** - Store passwords and API keys as assets
 6. **Organize Tasks** - For complex bots, create a `tasks/` folder
 7. **Test Modules** - Test each task module independently
@@ -480,4 +569,4 @@ port = 8080
 
 Just edit `bot.py` and run `python bot.py`. It's that simple!
 
-Happy automating! 🤖 
+Happy automating! 🤖
