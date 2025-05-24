@@ -17,7 +17,7 @@ class ConnectionException(Exception):
 class Client:
     """Client for interacting with the OpenAutomate Bot Agent API"""
     
-    def __init__(self, host: str = "localhost", port: int = 8081):
+    def __init__(self, host: str = "localhost", port: int = 8080):
         """Initialize the client with the Bot Agent API address
         
         Args:

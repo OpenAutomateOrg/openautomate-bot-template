@@ -523,7 +523,7 @@ version = 1.0.0
 [agent]
 enabled = true
 host = localhost
-port = 8081
+port = 8080
 
 [logging]
 level = INFO

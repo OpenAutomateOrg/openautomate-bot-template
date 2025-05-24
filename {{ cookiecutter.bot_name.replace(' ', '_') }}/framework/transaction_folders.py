@@ -1,11 +1,12 @@
 """
 Simple Transaction Folders
 
-Creates folders for automation bots in Documents/automationlab.
+Creates folders for automation bots based on configuration.
 """
 
 import shutil
 import logging
+import configparser
 from pathlib import Path
 
 
@@ -21,9 +22,46 @@ def get_simple_logger(name: str) -> logging.Logger:
     return logger
 
 
+def get_base_path_from_config(bot_name):
+    """
+    Get base path from config.ini file.
+    
+    Args:
+        bot_name (str): Name of the bot
+        
+    Returns:
+        Path: Base path for bot folders
+    """
+    try:
+        # Try to find config.ini in the bot directory
+        config_path = Path(__file__).parent.parent / "config" / "config.ini"
+        
+        if config_path.exists():
+            config = configparser.ConfigParser()
+            config.read(config_path)
+            
+            # Get base path from config
+            base_folder = config.get('folders', 'base_path', fallback='Documents/openautomatebot')
+            
+            # Convert to Path and expand home directory
+            if base_folder.startswith('Documents/'):
+                base_path = Path.home() / base_folder / bot_name
+            else:
+                base_path = Path(base_folder) / bot_name
+                
+            return base_path
+        else:
+            # Fallback if config not found
+            return Path.home() / "Documents" / "openautomatebot" / bot_name
+            
+    except Exception:
+        # Fallback if any error occurs
+        return Path.home() / "Documents" / "openautomatebot" / bot_name
+
+
 def create_transaction_folders(bot_name, logger=None):
     """
-    Create transaction folders for the bot in Documents/automationlab.
+    Create transaction folders for the bot based on configuration.
 
     Args:
         bot_name (str): Name of the bot
@@ -33,11 +71,21 @@ def create_transaction_folders(bot_name, logger=None):
         logger = get_simple_logger(bot_name)
 
     try:
-        # Create bot folder in Documents/automationlab
-        base_path = Path.home() / "Documents" / "automationlab" / bot_name
+        # Get base path from config
+        base_path = get_base_path_from_config(bot_name)
         
-        # Folder types to create
-        folders = ["input", "output", "temp", "screenshots"]
+        # Get folder names from config or use defaults
+        try:
+            config_path = Path(__file__).parent.parent / "config" / "config.ini"
+            if config_path.exists():
+                config = configparser.ConfigParser()
+                config.read(config_path)
+                folder_names = config.get('folders', 'subfolder_names', fallback='input,output,temp,screenshots').split(',')
+                folders = [name.strip() for name in folder_names]
+            else:
+                folders = ["input", "output", "temp", "screenshots"]
+        except Exception:
+            folders = ["input", "output", "temp", "screenshots"]
 
         for folder_name in folders:
             folder_path = base_path / folder_name
@@ -61,7 +109,7 @@ def cleanup_transaction_folders(bot_name, logger=None):
         logger = get_simple_logger(bot_name)
 
     try:
-        base_path = Path.home() / "Documents" / "automationlab" / bot_name
+        base_path = get_base_path_from_config(bot_name)
         
         # Clean these folders
         folders_to_clean = ["output", "temp"]
@@ -91,7 +139,8 @@ def get_folder_path(bot_name, folder_type="output"):
     Returns:
         Path: Path to the folder
     """
-    return Path.home() / "Documents" / "automationlab" / bot_name / folder_type
+    base_path = get_base_path_from_config(bot_name)
+    return base_path / folder_type
 
 
 def ensure_folder(bot_name, folder_type="output"):
