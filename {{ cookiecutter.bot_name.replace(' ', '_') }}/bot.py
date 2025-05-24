@@ -88,7 +88,7 @@ if __name__ == "__main__":
     print("🚀 Starting {{cookiecutter.project_name}}...")
     
     # Create and run bot
-    bot = Bot("{{cookiecutter.bot_id}}")
+    bot = Bot("{{cookiecutter.bot_name}}")
     results = bot.run()
     
     # Print results

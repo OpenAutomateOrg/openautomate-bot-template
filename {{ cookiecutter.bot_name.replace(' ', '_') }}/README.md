@@ -18,12 +18,12 @@
    python bot.py
    ```
 
-4. **Check results** in `Documents/openautomatebot/{{cookiecutter.bot_id}}/`
+4. **Check results** in `Documents/openautomatebot/{{cookiecutter.bot_name}}/`
 
 ## 📁 Project Structure
 
 ```
-{{cookiecutter.bot_id}}/
+{{cookiecutter.bot_name}}/
 ├── bot.py                    # 👈 Your main bot file - edit the execute() method!
 ├── framework/                # Bot framework (ready to use)
 │   ├── base_bot.py          # Base bot class with OpenAutomate integration
@@ -69,7 +69,7 @@ def execute(self):
 
 ### 2. Use Built-in Framework Features:
 
-- **Automatic folder creation** - `Documents/openautomatebot/{{cookiecutter.bot_id}}/`
+- **Automatic folder creation** - `Documents/openautomatebot/{{cookiecutter.bot_name}}/`
 - **Professional logging** - `self.logger.info('message')`
 - **OpenAutomate integration** - `self.get_asset('key')`, `self.update_status('status')`
 - **Error handling** - Automatic timing and error reporting
@@ -104,7 +104,7 @@ Edit `config/config.ini` for bot settings:
 
 ```ini
 [bot]
-name = {{cookiecutter.bot_id}}
+name = {{cookiecutter.bot_name}}
 version = 1.0.0
 
 [agent]
