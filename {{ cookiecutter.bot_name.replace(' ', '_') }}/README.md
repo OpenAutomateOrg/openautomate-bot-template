@@ -1,8 +1,6 @@
-# {{cookiecutter.project_name}}
+# {{cookiecutter.bot_name}}
 
-{{cookiecutter.project_short_description}}
-
-**Author:** {{cookiecutter.author_name}} <{{cookiecutter.author_email}}>
+{{cookiecutter.bot_description}}
 
 ## 🚀 Quick Start
 

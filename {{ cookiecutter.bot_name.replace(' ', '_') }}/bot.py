@@ -1,7 +1,5 @@
 """
-{{cookiecutter.project_short_description}}
-
-Author: {{cookiecutter.author_name}} <{{cookiecutter.author_email}}>
+{{cookiecutter.bot_description}}
 
 Please make sure you install the bot dependencies:
 pip install -r requirements.txt
@@ -23,7 +21,7 @@ from transaction_folders import create_transaction_folders, ensure_folder
 
 class Bot(BaseBot):
     """
-    {{cookiecutter.project_name}} - Simple automation bot
+    {{cookiecutter.bot_name}} - {{cookiecutter.bot_description}}
     
     Just modify the execute() method below to add your automation logic!
     """
@@ -38,7 +36,7 @@ class Bot(BaseBot):
         - Use self.get_asset('key') for secure data
         - Call self.update_status('message') for progress updates
         """
-        self.logger.info("🚀 Starting {{cookiecutter.project_name}}...")
+        self.logger.info("🚀 Starting {{cookiecutter.bot_name}}...")
         
         # Create working folders automatically
         create_transaction_folders(self.bot_name, self.logger)
@@ -72,7 +70,7 @@ class Bot(BaseBot):
             self.logger.info(f"💡 Add files to: {input_folder}")
         
         self.update_status("Automation completed")
-        self.logger.info("✅ {{cookiecutter.project_name}} completed!")
+        self.logger.info("✅ {{cookiecutter.bot_name}} completed!")
         
         return {
             'message': '✅ Automation completed successfully!',
@@ -85,7 +83,7 @@ class Bot(BaseBot):
 
 # Run the bot
 if __name__ == "__main__":
-    print("🚀 Starting {{cookiecutter.project_name}}...")
+    print("🚀 Starting {{cookiecutter.bot_name}}...")
     
     # Create and run bot
     bot = Bot("{{cookiecutter.bot_name}}")

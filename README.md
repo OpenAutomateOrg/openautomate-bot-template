@@ -73,7 +73,7 @@ If you're contributing to this template itself:
 ```
 openautomate-bot-template/
 ├── cookiecutter.json          # Template configuration
-├── {{cookiecutter.project_slug}}/  # Template files
+├── {{cookiecutter.bot_name}}/  # Template files
 │   ├── bot.py
 │   ├── framework/
 │   ├── config/
