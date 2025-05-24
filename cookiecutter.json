@@ -1,0 +1,7 @@
+{
+    "bot_id": "openautomateBot",
+    "project_name": "OpenAutomate Bot",
+    "project_short_description": "Python package for an OpenAutomate automation bot.",
+    "author_name": "Your Name",
+    "author_email": "your.email@example.com"
+} 

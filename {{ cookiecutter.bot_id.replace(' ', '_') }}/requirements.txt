@@ -1,0 +1,25 @@
+# OpenAutomate Bot Dependencies
+
+# Optional: OpenAutomate Agent SDK (install manually if needed)
+# openautomateagent
+
+# Core dependencies for framework
+pathlib2>=2.3.0           # For path handling
+configparser>=5.0.0       # For config management
+
+# Common automation libraries (uncomment as needed)
+requests>=2.25.0          # For web requests and APIs
+beautifulsoup4>=4.9.0     # For web scraping  
+selenium>=4.0.0           # For browser automation
+openpyxl>=3.0.0          # For Excel files
+pandas>=1.3.0            # For data processing
+pillow>=8.0.0            # For image processing
+
+# Email automation
+# smtplib (built-in)
+# email (built-in)
+
+# File processing
+# csv (built-in)
+# json (built-in)
+# xml.etree.ElementTree (built-in) 
