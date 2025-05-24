@@ -16,8 +16,6 @@ pip install cookiecutter
 1. **Generate from template**:
    ```bash
    cookiecutter https://github.com/OpenAutomateOrg/openautomate-bot-template
-   # OR if you have this locally:
-   cookiecutter d:\CapstoneProject\openautomate-bot-template
    ```
 
 2. **Answer the prompts**:
