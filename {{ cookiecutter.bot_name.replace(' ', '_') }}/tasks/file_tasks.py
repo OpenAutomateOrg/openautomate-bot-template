@@ -32,11 +32,11 @@ def process_csv_files(logger, input_folder, output_folder):
         csv_files = list(input_path.glob("*.csv"))
         
         if not csv_files:
-            logger.info("📄 No CSV files found to process")
+            logger.info("No CSV files found to process")
             return 0
-        
+
         for csv_file in csv_files:
-            logger.info(f"📊 Processing: {csv_file.name}")
+            logger.info(f"Processing: {csv_file.name}")
             
             # Read CSV and process (example: add a processed timestamp column)
             rows = []
@@ -111,7 +111,7 @@ def organize_files_by_type(logger, source_folder):
                         # Move file to category folder
                         destination = category_folder / file_path.name
                         shutil.move(str(file_path), str(destination))
-                        logger.info(f"📁 Moved {file_path.name} to {category}/")
+                        logger.info(f"Moved {file_path.name} to {category}/")
                         
                         organized_count += 1
                         category_found = True
@@ -123,7 +123,7 @@ def organize_files_by_type(logger, source_folder):
                     other_folder.mkdir(exist_ok=True)
                     destination = other_folder / file_path.name
                     shutil.move(str(file_path), str(destination))
-                    logger.info(f"📁 Moved {file_path.name} to other/")
+                    logger.info(f"Moved {file_path.name} to other/")
                     organized_count += 1
         
         log_task_complete(logger, "File Organization", f"{organized_count} files organized")
@@ -160,7 +160,7 @@ def cleanup_old_files(logger, folder_path, days_old=7):
             if file_path.is_file():
                 file_age = file_path.stat().st_mtime
                 if file_age < cutoff_time:
-                    logger.info(f"🗑️ Deleting old file: {file_path.name}")
+                    logger.info(f"Deleting old file: {file_path.name}")
                     file_path.unlink()
                     deleted_count += 1
         
@@ -194,11 +194,11 @@ def convert_text_files_to_uppercase(logger, input_folder, output_folder):
         text_files = list(input_path.glob("*.txt"))
         
         if not text_files:
-            logger.info("📄 No text files found to convert")
+            logger.info("No text files found to convert")
             return 0
-        
+
         for text_file in text_files:
-            logger.info(f"📝 Converting: {text_file.name}")
+            logger.info(f"Converting: {text_file.name}")
             
             # Read file content
             with open(text_file, 'r', encoding='utf-8') as infile:

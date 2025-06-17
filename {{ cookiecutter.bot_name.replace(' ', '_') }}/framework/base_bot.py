@@ -74,7 +74,7 @@ class BaseBot(ABC):
             latest_handler.setFormatter(formatter)
             logger.addHandler(latest_handler)
             
-            logger.info(f"📝 Logging to: {log_file}")
+            logger.info(f"Logging to: {log_file}")
             
         except Exception as e:
             # If file logging fails, just continue with console logging

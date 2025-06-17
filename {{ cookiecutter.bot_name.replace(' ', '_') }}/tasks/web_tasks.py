@@ -46,7 +46,7 @@ def scrape_website(logger, url, output_folder=None):
         raise ImportError(error_msg)
     
     try:
-        logger.info(f"🌐 Scraping: {url}")
+        logger.info(f"Scraping: {url}")
         
         # Make request with proper headers
         headers = {
@@ -133,7 +133,7 @@ def save_scraped_data(logger, data, output_folder):
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         
-        logger.info(f"💾 Scraped data saved to: {file_path}")
+        logger.info(f"Scraped data saved to: {file_path}")
         
     except Exception as e:
         logger.error(f"Failed to save scraped data: {e}")
@@ -161,8 +161,8 @@ def check_website_status(logger, urls):
         results = {}
         
         for url in urls:
-            logger.info(f"🔍 Checking: {url}")
-            
+            logger.info(f"Checking: {url}")
+
             try:
                 response = requests.get(url, timeout=10)
                 results[url] = {
@@ -170,19 +170,19 @@ def check_website_status(logger, urls):
                     'status': 'online' if response.status_code == 200 else 'issues',
                     'response_time': response.elapsed.total_seconds()
                 }
-                
+
                 if response.status_code == 200:
-                    logger.info(f"✅ {url} is online ({response.elapsed.total_seconds():.2f}s)")
+                    logger.info(f"{url} is online ({response.elapsed.total_seconds():.2f}s)")
                 else:
-                    logger.warning(f"⚠️ {url} returned status {response.status_code}")
-                    
+                    logger.warning(f"{url} returned status {response.status_code}")
+
             except Exception as e:
                 results[url] = {
                     'status_code': None,
                     'status': 'offline',
                     'error': str(e)
                 }
-                logger.error(f"❌ {url} is offline: {e}")
+                logger.error(f"{url} is offline: {e}")
         
         online_count = sum(1 for r in results.values() if r['status'] == 'online')
         log_task_complete(logger, "Website Status Check", f"{online_count}/{len(urls)} sites online")
@@ -215,7 +215,7 @@ def download_file(logger, url, output_folder, filename=None):
         raise ImportError(error_msg)
     
     try:
-        logger.info(f"⬇️ Downloading: {url}")
+        logger.info(f"Downloading: {url}")
         
         response = requests.get(url, stream=True, timeout=30)
         response.raise_for_status()
@@ -235,7 +235,7 @@ def download_file(logger, url, output_folder, filename=None):
                 f.write(chunk)
         
         file_size = file_path.stat().st_size
-        logger.info(f"💾 Downloaded {filename} ({file_size:,} bytes)")
+        logger.info(f"Downloaded {filename} ({file_size:,} bytes)")
         
         log_task_complete(logger, "File Download", f"Downloaded {filename}")
         return str(file_path)
@@ -267,7 +267,7 @@ def make_api_request(logger, url, method='GET', headers=None, data=None):
         raise ImportError(error_msg)
     
     try:
-        logger.info(f"🔗 Making {method} request to: {url}")
+        logger.info(f"Making {method} request to: {url}")
         
         # Default headers
         if headers is None:
@@ -289,7 +289,7 @@ def make_api_request(logger, url, method='GET', headers=None, data=None):
         except:
             result = {'text': response.text, 'status_code': response.status_code}
         
-        logger.info(f"✅ API request successful (status: {response.status_code})")
+        logger.info(f"API request successful (status: {response.status_code})")
         log_task_complete(logger, "API Request", f"Status {response.status_code}")
         
         return result

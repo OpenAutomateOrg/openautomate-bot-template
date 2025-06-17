@@ -25,30 +25,30 @@ class AssetDemoBot(BaseBot):
         """
         Show how to get and use assets.
         """
-        self.logger.info("🔑 Starting asset demo...")
-        
+        self.logger.info("Starting asset demo...")
+
         # Get all available asset keys
         asset_keys = self.get_all_asset_keys()
-        self.logger.info(f"📦 Found {len(asset_keys)} assets: {asset_keys}")
-        
+        self.logger.info(f"Found {len(asset_keys)} assets: {asset_keys}")
+
         # Try to get some common assets
         api_key = self.get_asset('api_key')
         database_url = self.get_asset('database_url')
         username = self.get_asset('username')
-        
+
         # Show what we found (don't log actual values for security)
         found_assets = []
         if api_key:
             found_assets.append('api_key')
-            self.logger.info("🔑 Found API key")
-        
+            self.logger.info("Found API key")
+
         if database_url:
             found_assets.append('database_url')
-            self.logger.info("🗄️ Found database URL")
-            
+            self.logger.info("Found database URL")
+
         if username:
             found_assets.append('username')
-            self.logger.info("👤 Found username")
+            self.logger.info("Found username")
         
         # Save a summary file
         output_folder = ensure_folder(self.bot_name, "output")
@@ -68,10 +68,10 @@ class AssetDemoBot(BaseBot):
             if not asset_keys:
                 f.write("  (No assets configured)\n")
         
-        self.logger.info(f"📄 Summary saved to: {output_file}")
-        
+        self.logger.info(f"Summary saved to: {output_file}")
+
         return {
-            'message': f'✅ Asset demo completed! Found {len(asset_keys)} assets',
+            'message': f'Asset demo completed! Found {len(asset_keys)} assets',
             'data': {
                 'total_assets': len(asset_keys),
                 'asset_keys': asset_keys,
@@ -82,16 +82,16 @@ class AssetDemoBot(BaseBot):
 
 
 if __name__ == "__main__":
-    print("🔑 Starting Asset Demo Bot...")
-    
+    print("Starting Asset Demo Bot...")
+
     bot = AssetDemoBot("AssetDemoBot")
     results = bot.run()
-    
+
     if results['success']:
-        print(f"✅ SUCCESS: {results['message']}")
+        print(f"SUCCESS: {results['message']}")
         if results['data']['asset_keys']:
-            print(f"📦 Available assets: {', '.join(results['data']['asset_keys'])}")
+            print(f"Available assets: {', '.join(results['data']['asset_keys'])}")
         else:
-            print("📦 No assets configured (this is normal for standalone testing)")
+            print("No assets configured (this is normal for standalone testing)")
     else:
-        print(f"❌ FAILED: {results['message']}") 
+        print(f"FAILED: {results['message']}")

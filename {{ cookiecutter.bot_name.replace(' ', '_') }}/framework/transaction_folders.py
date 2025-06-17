@@ -90,10 +90,10 @@ def create_transaction_folders(bot_name, logger=None):
         for folder_name in folders:
             folder_path = base_path / folder_name
             folder_path.mkdir(parents=True, exist_ok=True)
-            logger.info(f"📁 Created folder: {folder_path}")
+            logger.info(f"Created folder: {folder_path}")
 
     except Exception as e:
-        logger.error(f"❌ Error creating folders: {e}")
+        logger.error(f"Error creating folders: {e}")
         raise
 
 
@@ -122,10 +122,10 @@ def cleanup_transaction_folders(bot_name, logger=None):
                         item.unlink()
                     elif item.is_dir():
                         shutil.rmtree(item)
-                logger.info(f"🧹 Cleaned folder: {folder_path}")
+                logger.info(f"Cleaned folder: {folder_path}")
 
     except Exception as e:
-        logger.error(f"❌ Error cleaning folders: {e}")
+        logger.error(f"Error cleaning folders: {e}")
 
 
 def get_folder_path(bot_name, folder_type="output"):
