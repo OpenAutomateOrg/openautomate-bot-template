@@ -20,7 +20,7 @@ try:
     import requests
     from bs4 import BeautifulSoup
 except ImportError:
-    print("❌ Please install: pip install requests beautifulsoup4")
+    print("Please install: pip install requests beautifulsoup4")
     sys.exit(1)
 
 
@@ -33,12 +33,12 @@ class WebScraperBot(BaseBot):
         """
         Scrape a website and save results.
         """
-        self.logger.info("🕷️ Starting web scraping...")
-        
+        self.logger.info("Starting web scraping...")
+
         # Get URL to scrape (try from assets first, then use default)
         url = self.get_asset('scraper_url') or 'https://httpbin.org/html'
-        
-        self.logger.info(f"🌐 Scraping: {url}")
+
+        self.logger.info(f"Scraping: {url}")
         self.update_status(f"Scraping {url}")
         
         try:
@@ -83,10 +83,10 @@ class WebScraperBot(BaseBot):
                 for link in links:
                     f.write(f"  - {link['text']}: {link['url']}\n")
             
-            self.logger.info(f"💾 Results saved to: {output_file}")
-            
+            self.logger.info(f"Results saved to: {output_file}")
+
             return {
-                'message': f'✅ Successfully scraped {url}',
+                'message': f'Successfully scraped {url}',
                 'data': {
                     'url': url,
                     'title': title_text,
@@ -95,20 +95,20 @@ class WebScraperBot(BaseBot):
                     'output_file': str(output_file)
                 }
             }
-            
+
         except Exception as e:
-            self.logger.error(f"❌ Scraping failed: {e}")
+            self.logger.error(f"Scraping failed: {e}")
             raise
 
 
 if __name__ == "__main__":
-    print("🕷️ Starting Web Scraper Bot...")
-    
+    print("Starting Web Scraper Bot...")
+
     bot = WebScraperBot("WebScraperBot")
     results = bot.run()
-    
+
     if results['success']:
-        print(f"✅ SUCCESS: {results['message']}")
-        print(f"📊 Found {results['data']['headings_found']} headings and {results['data']['links_found']} links")
+        print(f"SUCCESS: {results['message']}")
+        print(f"Found {results['data']['headings_found']} headings and {results['data']['links_found']} links")
     else:
-        print(f"❌ FAILED: {results['message']}") 
+        print(f"FAILED: {results['message']}")

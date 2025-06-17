@@ -2,7 +2,7 @@
 
 {{cookiecutter.bot_description}}
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Install dependencies:**
    ```bash
@@ -18,11 +18,11 @@
 
 4. **Check results** in `Documents/openautomatebot/{{cookiecutter.bot_name}}/`
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 {{cookiecutter.bot_name}}/
-├── bot.py                    # 👈 Your main bot file - edit the execute() method!
+├── bot.py                    # Your main bot file - edit the execute() method!
 ├── framework/                # Bot framework (ready to use)
 │   ├── base_bot.py          # Base bot class with OpenAutomate integration
 │   ├── transaction_folders.py # Automatic folder management
@@ -42,7 +42,7 @@
 └── .gitignore               # Git ignore
 ```
 
-## 📝 How to Use
+## How to Use
 
 ### 1. Edit the `execute()` method in `bot.py`:
 
@@ -96,7 +96,7 @@ from tasks.email_tasks import send_email, send_notification, send_report
 - **`examples/asset_demo.py`** - Platform integration demo
 - **`examples/complex_bot_example.py`** - Advanced automation patterns
 
-## ⚙️ Configuration
+## Configuration
 
 Edit `config/config.ini` for bot settings:
 
@@ -113,7 +113,7 @@ port = 8080
 level = INFO
 ```
 
-## 🔧 OpenAutomate Integration
+## OpenAutomate Integration
 
 ### Secure Asset Management
 ```python
@@ -137,7 +137,7 @@ self.logger.warning("File not found, skipping...")
 self.logger.error("Failed to connect to API")
 ```
 
-## 📦 Adding Dependencies
+## Adding Dependencies
 
 The template includes common automation libraries. Uncomment in `requirements.txt` as needed:
 
@@ -149,13 +149,13 @@ pip install requests beautifulsoup4 selenium openpyxl pandas pillow
 pip install your-library-name
 ```
 
-## 🎯 Common Automation Patterns
+## Common Automation Patterns
 
 ### File Processing Bot
 ```python
 def execute(self):
     from tasks.file_tasks import process_csv_files
-    
+
     results = process_csv_files(
         input_folder=ensure_folder(self.bot_name, "input"),
         output_folder=ensure_folder(self.bot_name, "output")
@@ -167,9 +167,9 @@ def execute(self):
 ```python
 def execute(self):
     from tasks.web_tasks import scrape_website
-    
+
     data = scrape_website("https://example.com")
-    
+
     # Save results
     output_file = ensure_folder(self.bot_name, "output") / "scraped_data.json"
     with open(output_file, 'w') as f:
@@ -180,10 +180,10 @@ def execute(self):
 ```python
 def execute(self):
     from tasks.email_tasks import send_report
-    
+
     # Process data
     results = self.process_data()
-    
+
     # Send email report
     send_report(
         to_email=self.get_asset('recipient_email'),
@@ -192,7 +192,7 @@ def execute(self):
     )
 ```
 
-## 🚀 Deployment
+## Deployment
 
 When ready to deploy to OpenAutomate:
 
@@ -202,20 +202,20 @@ When ready to deploy to OpenAutomate:
 4. **Configure assets** for secure data (API keys, passwords, etc.)
 5. **Schedule or trigger** your automation
 
-## 🆘 Need Help?
+## Need Help?
 
 1. **Check examples** - Look in `examples/` folder
-2. **Use ready-made tasks** - Check `tasks/` folder  
+2. **Use ready-made tasks** - Check `tasks/` folder
 3. **Review framework** - Check `framework/` folder
 4. **Test often** - Run `python bot.py` frequently
 
-## 🎉 What You Get
+## What You Get
 
-✅ **Complete infrastructure** - Framework, tasks, examples, config  
-✅ **OpenAutomate integration** - Asset management, status updates, logging  
-✅ **Ready-to-use utilities** - File processing, web scraping, email automation  
-✅ **Working examples** - Learn from real automation patterns  
-✅ **Professional setup** - Logging, error handling, folder management  
-✅ **Simple development** - Just edit the `execute()` method!  
+- **Complete infrastructure** - Framework, tasks, examples, config
+- **OpenAutomate integration** - Asset management, status updates, logging
+- **Ready-to-use utilities** - File processing, web scraping, email automation
+- **Working examples** - Learn from real automation patterns
+- **Professional setup** - Logging, error handling, folder management
+- **Simple development** - Just edit the `execute()` method!
 
-Happy automating! 🤖 
+Happy automating!

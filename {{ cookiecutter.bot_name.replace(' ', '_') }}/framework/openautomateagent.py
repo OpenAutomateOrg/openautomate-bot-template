@@ -108,7 +108,9 @@ class Client:
             response = requests.post(url, json={"status": status})
             return response.status_code == 200
         except requests.RequestException as e:
-            raise ConnectionException(f"Error connecting to Bot Agent: {e}")
+            # Don't raise exception for status updates - just log and continue
+            self.logger.debug(f"Failed to send status update: {e}")
+            return False
     
     def log(self, message: str, level: str = "info") -> bool:
         """Log a message through the Bot Agent

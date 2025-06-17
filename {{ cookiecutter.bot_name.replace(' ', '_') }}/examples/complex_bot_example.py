@@ -23,7 +23,7 @@ try:
     from tasks import file_tasks, web_tasks, email_tasks
     TASKS_AVAILABLE = True
 except ImportError as e:
-    print(f"⚠️  Task modules not available: {e}")
+    print(f"Task modules not available: {e}")
     TASKS_AVAILABLE = False
 
 
@@ -43,23 +43,23 @@ class ComplexAutomationBot(BaseBot):
         """
         Main workflow - orchestrate all automation tasks.
         """
-        self.logger.info("🤖 Starting complex automation workflow...")
-        
+        self.logger.info("Starting complex automation workflow...")
+
         if not TASKS_AVAILABLE:
             return {
-                'message': '❌ Task modules not available. Please check imports.',
+                'message': 'Task modules not available. Please check imports.',
                 'data': {'error': 'Missing task modules'}
             }
-        
+
         # Create working folders
         create_transaction_folders(self.bot_name, self.logger)
         input_folder = ensure_folder(self.bot_name, "input")
         output_folder = ensure_folder(self.bot_name, "output")
         temp_folder = ensure_folder(self.bot_name, "temp")
-        
+
         # Initialize results tracking
         results = {
-            'message': '✅ Complex automation completed successfully!',
+            'message': 'Complex automation completed successfully!',
             'data': {
                 'tasks_completed': [],
                 'files_processed': 0,
@@ -123,14 +123,14 @@ class ComplexAutomationBot(BaseBot):
             error_msg = f"Error in complex workflow: {str(e)}"
             self.logger.error(error_msg)
             results['data']['errors'].append(error_msg)
-            results['message'] = f'❌ Complex automation failed: {str(e)}'
+            results['message'] = f'Complex automation failed: {str(e)}'
             raise
-        
+
         # Final status update
         completed_tasks = len(results['data']['tasks_completed'])
         self.update_status(f"Completed {completed_tasks} automation tasks")
-        
-        self.logger.info("🎉 Complex automation workflow finished!")
+
+        self.logger.info("Complex automation workflow finished!")
         return results
     
     def _process_csv_files(self, input_folder, output_folder):
@@ -236,7 +236,7 @@ class ComplexAutomationBot(BaseBot):
             
             # Check if we have email credentials
             if not smtp_config['username'] or not smtp_config['password']:
-                self.logger.info("📧 Email credentials not configured, skipping email reports")
+                self.logger.info("Email credentials not configured, skipping email reports")
                 return 0
             
             # Add bot name to report data
@@ -271,23 +271,23 @@ class ComplexAutomationBot(BaseBot):
 
 # Standalone execution
 if __name__ == "__main__":
-    print("🚀 Starting Complex Automation Bot...")
-    print("📋 This bot demonstrates multiple task orchestration:")
-    print("   • File processing (CSV and text)")
-    print("   • Web scraping and status checking")
-    print("   • File organization")
-    print("   • Email reporting")
-    print("   • Automated cleanup")
+    print("Starting Complex Automation Bot...")
+    print("This bot demonstrates multiple task orchestration:")
+    print("   - File processing (CSV and text)")
+    print("   - Web scraping and status checking")
+    print("   - File organization")
+    print("   - Email reporting")
+    print("   - Automated cleanup")
     print()
-    
+
     # Load config to get bot name
     try:
         from config_manager import ConfigManager
         config_manager = ConfigManager()
         bot_name = config_manager.get('bot.name', 'ComplexBot')
-        print(f"📋 Using bot name from config: {bot_name}")
+        print(f"Using bot name from config: {bot_name}")
     except Exception as e:
-        print(f"⚠️  Could not load config, using default name: {e}")
+        print(f"Could not load config, using default name: {e}")
         bot_name = 'ComplexBot'
     
     # Create and run complex bot
@@ -297,22 +297,22 @@ if __name__ == "__main__":
     # Print detailed results
     print("\n" + "="*50)
     if results['success']:
-        print(f"✅ SUCCESS: {results['message']}")
-        print(f"📊 Tasks completed: {', '.join(results['data']['tasks_completed'])}")
-        print(f"📁 Files processed: {results['data']['files_processed']}")
-        print(f"🌐 Websites scraped: {results['data']['websites_scraped']}")
-        print(f"🗂️  Files organized: {results['data']['files_organized']}")
-        print(f"📧 Emails sent: {results['data']['emails_sent']}")
-        print(f"🧹 Files cleaned: {results['data']['files_cleaned']}")
-        print(f"⏱️  Completed in {results['execution_time']:.2f} seconds")
+        print(f"SUCCESS: {results['message']}")
+        print(f"Tasks completed: {', '.join(results['data']['tasks_completed'])}")
+        print(f"Files processed: {results['data']['files_processed']}")
+        print(f"Websites scraped: {results['data']['websites_scraped']}")
+        print(f"Files organized: {results['data']['files_organized']}")
+        print(f"Emails sent: {results['data']['emails_sent']}")
+        print(f"Files cleaned: {results['data']['files_cleaned']}")
+        print(f"Completed in {results['execution_time']:.2f} seconds")
     else:
-        print(f"❌ FAILED: {results['message']}")
+        print(f"FAILED: {results['message']}")
         if results['data']['errors']:
-            print(f"❌ Errors: {', '.join(results['data']['errors'])}")
-    
-    print("👋 Complex bot finished!")
-    print("\n💡 Tips:")
-    print("   • Add CSV files to input folder to see processing")
-    print("   • Configure email assets for reporting")
-    print("   • Check output folder for results")
-    print("   • Customize URLs in assets for scraping") 
+            print(f"Errors: {', '.join(results['data']['errors'])}")
+
+    print("Complex bot finished!")
+    print("\nTips:")
+    print("   - Add CSV files to input folder to see processing")
+    print("   - Configure email assets for reporting")
+    print("   - Check output folder for results")
+    print("   - Customize URLs in assets for scraping")
