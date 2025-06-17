@@ -43,21 +43,21 @@ def send_simple_email(logger, smtp_config, recipient, subject, message):
         raise ImportError(error_msg)
     
     try:
-        logger.info(f"📧 Sending email to: {recipient}")
-        
+        logger.info(f"Sending email to: {recipient}")
+
         # Create message
         msg = MimeText(message)
         msg['Subject'] = subject
         msg['From'] = smtp_config['from_email']
         msg['To'] = recipient
-        
+
         # Send email
         with smtplib.SMTP(smtp_config['server'], smtp_config['port']) as server:
             server.starttls()
             server.login(smtp_config['username'], smtp_config['password'])
             server.send_message(msg)
-        
-        logger.info("✅ Email sent successfully")
+
+        logger.info("Email sent successfully")
         log_task_complete(logger, "Send Email", f"Sent to {recipient}")
         return True
         
@@ -89,7 +89,7 @@ def send_html_email(logger, smtp_config, recipient, subject, html_content, text_
         raise ImportError(error_msg)
     
     try:
-        logger.info(f"📧 Sending HTML email to: {recipient}")
+        logger.info(f"Sending HTML email to: {recipient}")
         
         # Create multipart message
         msg = MimeMultipart('alternative')
@@ -112,7 +112,7 @@ def send_html_email(logger, smtp_config, recipient, subject, html_content, text_
             server.login(smtp_config['username'], smtp_config['password'])
             server.send_message(msg)
         
-        logger.info("✅ HTML email sent successfully")
+        logger.info("HTML email sent successfully")
         log_task_complete(logger, "Send HTML Email", f"Sent to {recipient}")
         return True
         
@@ -148,8 +148,8 @@ def send_email_with_attachment(logger, smtp_config, recipient, subject, message,
         if not attachment_file.exists():
             raise FileNotFoundError(f"Attachment file not found: {attachment_path}")
         
-        logger.info(f"📧 Sending email with attachment to: {recipient}")
-        logger.info(f"📎 Attachment: {attachment_file.name}")
+        logger.info(f"Sending email with attachment to: {recipient}")
+        logger.info(f"Attachment: {attachment_file.name}")
         
         # Create multipart message
         msg = MimeMultipart()
@@ -178,7 +178,7 @@ def send_email_with_attachment(logger, smtp_config, recipient, subject, message,
             server.login(smtp_config['username'], smtp_config['password'])
             server.send_message(msg)
         
-        logger.info("✅ Email with attachment sent successfully")
+        logger.info("Email with attachment sent successfully")
         log_task_complete(logger, "Send Email with Attachment", f"Sent to {recipient}")
         return True
         
@@ -213,12 +213,12 @@ def send_report_email(logger, smtp_config, recipients, report_data):
         html_content = f"""
         <html>
         <body>
-            <h2>🤖 Automation Report</h2>
+            <h2>Automation Report</h2>
             <p><strong>Bot:</strong> {report_data.get('bot_name', 'Unknown')}</p>
-            <p><strong>Status:</strong> {'✅ Success' if report_data.get('success', False) else '❌ Failed'}</p>
+            <p><strong>Status:</strong> {'Success' if report_data.get('success', False) else 'Failed'}</p>
             <p><strong>Execution Time:</strong> {report_data.get('execution_time', 0):.2f} seconds</p>
-            
-            <h3>📊 Results</h3>
+
+            <h3>Results</h3>
             <ul>
         """
         
@@ -289,7 +289,7 @@ def check_inbox(logger, imap_config, folder='INBOX', limit=10):
         raise ImportError(error_msg)
     
     try:
-        logger.info(f"📬 Checking {folder} for new emails...")
+        logger.info(f"Checking {folder} for new emails...")
         
         # Connect to IMAP server
         mail = imaplib.IMAP4_SSL(imap_config['server'], imap_config['port'])
@@ -324,7 +324,7 @@ def check_inbox(logger, imap_config, folder='INBOX', limit=10):
         mail.close()
         mail.logout()
         
-        logger.info(f"📧 Found {len(emails)} emails in {folder}")
+        logger.info(f"Found {len(emails)} emails in {folder}")
         log_task_complete(logger, "Check Inbox", f"Retrieved {len(emails)} emails")
         
         return emails
@@ -389,7 +389,7 @@ def create_email_template(template_name, data):
         'notification': {
             'subject': 'Notification: {title}',
             'html': '''
-            <h2>📢 {title}</h2>
+            <h2>{title}</h2>
             <p>{message}</p>
             <p><em>Sent at {timestamp}</em></p>
             ''',
