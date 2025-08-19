@@ -1,5 +1,4 @@
 {
     "bot_name": "MyBot",
-    "bot_description": "A Python automation bot",
-    "version": "1.0.0"
+    "bot_description": "A Python automation bot"
 }

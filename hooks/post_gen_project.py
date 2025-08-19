@@ -21,7 +21,7 @@ def main():
     # Get bot information from cookiecutter variables
     bot_name = "{{ cookiecutter.bot_name }}"
     bot_description = "{{ cookiecutter.bot_description }}"
-    version = "{{ cookiecutter.version }}"
+    version = "1.0.0"  # Default version, not prompted to user
     
     # Get the current directory (generated project directory)
     project_dir = os.path.basename(os.getcwd())

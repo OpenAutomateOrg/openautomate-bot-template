@@ -1,5 +1,5 @@
 {
   "name": "{{ cookiecutter.bot_name }}",
   "description": "{{ cookiecutter.bot_description }}",
-  "version": "{{ cookiecutter.version }}"
+  "version": "1.0.0"
 } 
