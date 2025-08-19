@@ -13,6 +13,7 @@ pip install cookiecutter
 
 ### Create a New Bot Project
 
+#### First Time Setup (Clone Template)
 1. **Generate from template**:
    ```bash
    cookiecutter https://github.com/OpenAutomateOrg/openautomate-bot-template
@@ -24,9 +25,30 @@ pip install cookiecutter
    bot_description [A Python automation bot]: Processes CSV files automatically
    ```
 
+#### Additional Bots (Using Local Template)
+If you've already cloned this template repository locally, you can create new bots directly:
+
+1. **Generate from local template**:
+   ```bash
+   cookiecutter path/to/openautomate-bot-template
+   ```
+   
+   Or if you're in the template directory:
+   ```bash
+   cookiecutter .
+   ```
+
+2. **Answer the prompts**:
+   ```
+   bot_name [MyBot]: EmailProcessorBot
+   bot_description [A Python automation bot]: Processes emails automatically
+   ```
+
+#### Complete Setup (Both Methods)
+
 3. **Navigate to your new project**:
    ```bash
-   cd FileProcessorBot
+   cd YourBotName
    ```
 
 4. **Install dependencies**:

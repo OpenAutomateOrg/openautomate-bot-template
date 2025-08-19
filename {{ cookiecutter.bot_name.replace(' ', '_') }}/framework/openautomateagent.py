@@ -113,25 +113,19 @@ class Client:
             return False
     
     def log(self, message: str, level: str = "info") -> bool:
-        """Log a message through the Bot Agent
+        """Log a message using standard Python logging
         
         Args:
             message: The message to log
             level: The log level (debug, info, warning, error)
             
         Returns:
-            True if the message was logged successfully
+            True (always successful for local logging)
         """
-        try:
-            response = requests.post(f"{self.base_url}/log", json={
-                "message": message,
-                "level": level.lower()
-            })
-            return response.status_code == 200
-        except requests.RequestException as e:
-            # Don't raise an exception for logging failures
-            self.logger.error(f"Failed to send log: {e}")
-            return False
+        # Use standard Python logging instead of HTTP calls
+        log_level = getattr(logging, level.upper(), logging.INFO)
+        self.logger.log(log_level, message)
+        return True
             
 # Example usage
 if __name__ == "__main__":
